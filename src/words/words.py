@@ -9,6 +9,8 @@ rawlist = raw.split(",")
 
 wordlist = [w.strip("[]\" ") for w in rawlist]
 
+print(len(wordlist))
+
 for w in wordlist:
     words.write(w)
     words.write("\n")
