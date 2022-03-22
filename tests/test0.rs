@@ -32,7 +32,7 @@ fn all_matches() {
 fn entropy() {
     let wordlist = words::get_words("src/words/words.txt");
     let guess: String = String::from("crate");
-    let entropy: f64 = words::compute_entropy(guess.clone(), wordlist.clone());
+    let entropy: f64 = words::guess_entropy(guess.clone(), wordlist.clone());
 
     dbg!(&entropy);
 }

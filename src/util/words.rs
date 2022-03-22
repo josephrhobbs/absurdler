@@ -4,6 +4,11 @@ use std::fs::File;
 use std::io::Read;
 use super::math;
 
+pub struct Guess {
+    pub value: String,
+    pub entropy: f64,
+}
+
 pub fn get_words(filename: &str) -> Vec<String> {
     let mut file = File::open(filename).expect("Could not find word file");
     let mut words: String = String::new();
@@ -43,6 +48,18 @@ pub fn get_matches(guess: String, wordlist: Vec<String>, combination: String) ->
     words
 }
 
+// Helper function: count the number of words that match a combination in the wordlist
+pub fn count_matches(guess: String, wordlist: Vec<String>, combination: String) -> u64 {
+    let mut count: u64 = 0;
+    for word in wordlist.iter() {
+        let chk: bool = check_match(guess.clone(), combination.clone(), word.to_string().clone());
+        if chk {
+            count += 1;
+        }
+    }
+    count
+}
+
 // Gets a list of all possible output combinations
 pub fn get_all_combinations(len: u8) -> Vec<String> {
     let mut result: Vec<String> = Vec::new();
@@ -61,26 +78,19 @@ pub fn get_all_combinations(len: u8) -> Vec<String> {
     result
 }
 
-pub fn compute_entropy(guess: String, wordlist: Vec<String>) -> f64 {
+pub fn guess_entropy(guess: String, wordlist: Vec<String>) -> f64 {
     let combos: Vec<String> = get_all_combinations(5);
     let search_space_size: f64 = wordlist.len() as f64;
     let mut entropy: f64 = 0.0;
-    let mut possible: Vec<Vec<String>> = Vec::new();
+    let mut possible_count: u64 = 0;
     for combo in combos {
-        let possible_words: Vec<String> = get_matches(guess.clone(), wordlist.clone(), combo.to_string().clone());
-        possible.push(possible_words);
-    }
-
-    if possible.len() == 0 {
-        return 0.0;
-    }
-    // Probability of each combo
-    let probability: f64 = 1.0/(possible.len() as f64);
-
-    for p in possible {
-        if p.len() != 0 {
-            entropy += probability*(search_space_size/(p.len() as f64)).ln();
+        let possible_words: u64 = count_matches(guess.clone(), wordlist.clone(), combo.to_string().clone());
+        if possible_words != 0 {
+            possible_count += 1;
+            entropy += (search_space_size/(possible_words as f64)).ln();
         }
     }
+
+    entropy *= 1.0/(possible_count as f64);
     entropy
 }
