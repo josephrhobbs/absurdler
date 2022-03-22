@@ -53,5 +53,5 @@ fn main() {
         bar.inc(1);
     }
     bar.finish();
-    println!("Completed {} Wordles with an average score of {}\n", wordlist.len(), (score as f64/tries as f64));
+    println!("Completed {} Wordles with an average score of {}\n", n, (score as f64/tries as f64));
 }
