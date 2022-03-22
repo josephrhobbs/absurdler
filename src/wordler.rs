@@ -1,4 +1,4 @@
-// crate::main
+// crate::wordler
 
 use std::io;
 use std::io::Write;
