@@ -3,6 +3,8 @@
 use std::fs::File;
 use std::io::Read;
 
+use indicatif::ProgressBar;
+
 pub struct Guess {
     pub value: String,
     pub entropy: f64,
@@ -94,4 +96,36 @@ pub fn compute_entropy(colored_word: String, wordlist: Vec<String>) -> f64 {
         entropy += compute_contribution(colored_word.clone(), wordlist.clone(), combo.clone());
     }
     entropy
+}
+
+// Guesses a word and returns the reduced wordlist
+pub fn guess(wordlist: Vec<String>, verbose: bool) -> (String, f64) {
+    let num_of_words = wordlist.len();
+    let mut guesses: Vec<Guess> = Vec::new();
+
+    let bar = ProgressBar::new(num_of_words as u64);
+
+    if verbose {
+        println!("Searching {} words for the optimal guess...", num_of_words);
+    }
+
+    for word in wordlist.clone().into_iter() {
+        guesses.push(Guess {value: word.clone(), entropy: compute_entropy(word.clone(), wordlist.clone())});
+        if verbose {bar.inc(1)}
+    }
+    bar.finish();
+    if verbose {
+        println!("Done searching!\n");
+    }
+
+    let sorted_guesses = &mut guesses[..];
+    if sorted_guesses.len() == 0 {
+        return (String::new(), 0.0);
+    }
+    sorted_guesses.sort_by(|x, y| y.entropy.partial_cmp(&x.entropy).unwrap());
+
+    let top_guess = sorted_guesses[0].value.clone();
+    let guess_entropy = sorted_guesses[0].entropy;
+
+    return (top_guess.to_string(), guess_entropy);
 }

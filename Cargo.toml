@@ -8,6 +8,14 @@ edition = "2018"
 [dependencies]
 indicatif = "0.16.2"
 
+[[bin]]
+name = "wordler"
+path = "src/wordler.rs"
+
+[[bin]]
+name = "benchmark"
+path = "src/benchmark.rs"
+
 [lib]
 name = "util"
 path = "src/util/mod.rs"

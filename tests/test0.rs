@@ -9,13 +9,6 @@ fn combinations() {
 }
 
 #[test]
-fn words_matching() {
-    let colored_word: String = String::from("raise");
-    let combo: String = String::from("/xxx/");
-    let reduced_wordlist: Vec<String> = words::get
-}
-
-#[test]
 fn single_match() {
     let word: String = String::from("their");
     let combo: String = String::from("x/x//");
