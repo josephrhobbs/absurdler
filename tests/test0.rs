@@ -9,9 +9,16 @@ fn combinations() {
 }
 
 #[test]
+fn words_matching() {
+    let colored_word: String = String::from("raise");
+    let combo: String = String::from("/xxx/");
+    let reduced_wordlist: Vec<String> = words::get
+}
+
+#[test]
 fn single_match() {
     let word: String = String::from("their");
-    let combo: String = String::from("X/X//");
+    let combo: String = String::from("x/x//");
     let guess: String = String::from("crate");
     let check_match: bool = words::check_match(guess.clone(), combo.clone(), word.clone());
 
@@ -22,7 +29,7 @@ fn single_match() {
 fn all_matches() {
     let wordlist = words::get_words("src/words/words.txt");
     let guess: String = String::from("crate");
-    let combo: String = String::from("X/X//");
+    let combo: String = String::from("x/x//");
     let words: Vec<String> = words::get_matches(guess.clone(), wordlist.clone(), combo.clone());
 
     dbg!(&guess, &combo, &words);
