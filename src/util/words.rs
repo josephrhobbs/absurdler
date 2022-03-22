@@ -113,8 +113,8 @@ pub fn guess(wordlist: Vec<String>, verbose: bool) -> (String, f64) {
         guesses.push(Guess {value: word.clone(), entropy: compute_entropy(word.clone(), wordlist.clone())});
         if verbose {bar.inc(1)}
     }
-    bar.finish();
     if verbose {
+        bar.finish();
         println!("Done searching!\n");
     }
 
