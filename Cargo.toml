@@ -3,6 +3,7 @@ name = "wordler"
 authors = ["Hobbs Bros."]
 license = "MIT"
 description = "A simple Wordle bot."
+repository = "https://github.com/hobbsbros/wordle"
 version = "0.1.0"
 edition = "2018"
 
