@@ -12,22 +12,32 @@ pub struct Guess {
 
 pub fn get_words() -> Vec<String> {
     let args: Vec<String> = std::env::args().collect();
-    if args.len() < 2 {
-        println!("ERROR: When executing ezwordle, you must specify as an argument a *.txt file containing Wordle's allowed word list.");
-        println!("You may download this file from https://github.com/hobbsbros/ezwordle/blob/main/src/words/words.txt\n");
-        panic!("No word list specified");
-    }
-    let filename = args[1].clone();
-    let file = File::open(filename);
-    let mut file = match file {
-        Ok(f) => f,
-        Err(_) => {
-            println!("ERROR: EZWordle could not find the file specified.\n");
-            panic!("Could not find specified word list file");
-        }
-    };
+    let mut file;
     let mut words: String = String::new();
-    let result = file.read_to_string(&mut words);
+    let result;
+    if args.len() < 2 {
+        file = match File::open("words.txt") {
+            Ok(f) => f,
+            Err(_) => {
+                println!("When executing ezwordle, you must specify a raw text file containing Wordle's allowed word list.");
+                println!("You may download this file from https://github.com/hobbsbros/ezwordle/blob/main/src/words/words.txt\n");
+                println!("\nFor example: $ ezwordle words.txt\n");
+                println!("If the file words.txt exists within the directory, ");
+                panic!("No word list specified");
+            }
+        };
+        result = file.read_to_string(&mut words);
+    } else {
+        let filename = args[1].clone();
+        let mut file = match File::open(filename) {
+            Ok(f) => f,
+            Err(_) => {
+                println!("ERROR: EZWordle could not find the file specified.\n");
+                panic!("Could not find specified word list file");
+            }
+        };
+        result = file.read_to_string(&mut words);
+    }
     match result {
         Ok(_) => {},
         Err(_) => {

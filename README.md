@@ -17,6 +17,8 @@ You may install this in any directory but Desktop is recommended.
 # Playing
 From the directory that you installed `words.txt` run `ezwordle words.txt`.
 
+If the word list file is named `words.txt` and is in your current directory, you do not need to specify the filename.
+
 EZWordle will make a recommendation, but still requires you to input the actual guess that you make.
 After inputting your guess, EZWordle will ask you for feedback.
 
