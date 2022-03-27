@@ -1,6 +1,8 @@
 [package]
-name = "wordle"
+name = "wordler"
 authors = ["Hobbs Bros."]
+license = "MIT"
+description = "A simple Wordle bot."
 version = "0.1.0"
 edition = "2018"
 
@@ -12,10 +14,6 @@ indicatif = "0.16.2"
 [[bin]]
 name = "wordler"
 path = "src/wordler.rs"
-
-[[bin]]
-name = "benchmark"
-path = "src/benchmark.rs"
 
 [lib]
 name = "util"
