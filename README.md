@@ -1,4 +1,4 @@
-# WORDLE
+# EZWordle
 A simple Wordle helper bot.  Both backend and frontend are written in Rust.
 
 # Instructions
