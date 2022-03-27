@@ -12,10 +12,29 @@ pub struct Guess {
 
 pub fn get_words() -> Vec<String> {
     let args: Vec<String> = std::env::args().collect();
+    if args.len() < 2 {
+        println!("ERROR: When executing ezwordle, you must specify as an argument a *.txt file containing Wordle's allowed word list.");
+        println!("You may download this file from https://github.com/hobbsbros/ezwordle/blob/main/src/words/words.txt\n");
+        panic!("No word list specified");
+    }
     let filename = args[1].clone();
-    let mut file = File::open(filename).expect("Could not find word file");
+    let file = File::open(filename);
+    let mut file = match file {
+        Ok(f) => f,
+        Err(_) => {
+            println!("ERROR: EZWordle could not find the file specified.\n");
+            panic!("Could not find specified word list file");
+        }
+    };
     let mut words: String = String::new();
-    let _result = file.read_to_string(&mut words).expect("Something went wrong reading the file");
+    let result = file.read_to_string(&mut words);
+    match result {
+        Ok(_) => {},
+        Err(_) => {
+            println!("ERROR: EZWordle found the file specified but was unable to read it.\n");
+            panic!("Could not read word list file");
+        }
+    }
     let output: Vec<String> = words.lines().map(String::from).collect();
     output
 }
