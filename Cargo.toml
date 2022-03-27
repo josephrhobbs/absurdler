@@ -3,7 +3,7 @@ name = "ezwordle"
 authors = ["Hobbs Bros."]
 license = "MIT"
 description = "A simple bot to help you solve the daily Wordle."
-repository = "https://github.com/hobbsbros/wordle"
+repository = "https://github.com/hobbsbros/ezwordle"
 version = "0.1.0"
 edition = "2018"
 
