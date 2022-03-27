@@ -1,8 +1,8 @@
 [package]
-name = "wordler"
+name = "ezwordle"
 authors = ["Hobbs Bros."]
 license = "MIT"
-description = "A simple Wordle bot."
+description = "A simple bot to help you solve the daily Wordle."
 repository = "https://github.com/hobbsbros/wordle"
 version = "0.1.0"
 edition = "2018"
