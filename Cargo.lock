@@ -3,6 +3,13 @@
 version = 3
 
 [[package]]
+name = "absurdler"
+version = "0.1.0"
+dependencies = [
+ "indicatif",
+]
+
+[[package]]
 name = "console"
 version = "0.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -20,13 +27,6 @@ name = "encode_unicode"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
-
-[[package]]
-name = "ezwordle"
-version = "0.4.0"
-dependencies = [
- "indicatif",
-]
 
 [[package]]
 name = "indicatif"

@@ -10,10 +10,12 @@ fn main() {
     let mut words: Vec<String> = words::get_words();
     let all_words: Vec<String> = words.clone();
 
-    let mut top_guess: String = String::from("raise");
+    let mut top_guess;
     let mut combination: String;
 
-    for i in 0..6 {
+    let mut i = 0;
+
+    loop {
         // Guess the word in words with the highest entropy
         if i != 0 {
             let (guess, entropy) = words::guess(words.clone(), true);
@@ -24,7 +26,7 @@ fn main() {
             }
             println!("I guess {} with entropy {}\n", top_guess.to_string().to_uppercase(), entropy);
         } else {
-            println!("I guess {}\n", top_guess.to_string().to_uppercase());
+            println!("Input your first guess below.  You may choose this voluntarily or randomly.\n");
         }
 
         let mut human_guess: String = String::new();
@@ -55,6 +57,8 @@ fn main() {
         }
 
         words = words::get_matches(human_guess.to_string().clone(), words.clone(), combination.clone());
+
+        i += 1;
     }
     println!("\nThanks for playing!\n");
 }
