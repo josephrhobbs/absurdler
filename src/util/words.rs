@@ -22,7 +22,7 @@ pub fn get_words() -> Vec<String> {
                 println!("When executing ezwordle, you must specify a raw text file containing Wordle's allowed word list.");
                 println!("You may download this file from https://github.com/hobbsbros/ezwordle/blob/main/src/words/words.txt\n");
                 println!("\nFor example: $ ezwordle words.txt\n");
-                println!("If the file words.txt exists within the directory, ");
+                println!("If the file words.txt exists within the directory, you do not need to specify words.txt as an argument.");
                 panic!("No word list specified");
             }
         };
